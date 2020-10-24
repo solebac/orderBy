@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_users")
 public class User implements Serializable {
@@ -29,6 +31,7 @@ public class User implements Serializable {
 	//Um User tem varios Order
 	//Obs.: Deve-se instancia as Collections
 	//     -only Get, pois so vamos acrescentas e remover elementos
+	@JsonIgnore 
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 	

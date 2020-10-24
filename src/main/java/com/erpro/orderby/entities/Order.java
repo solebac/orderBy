@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.erpro.orderby.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -28,15 +29,20 @@ public class Order implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
+	//private OrderStatus ordeStatus;//Sem construtor
+	private Integer ordeStatus;
+	
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Order(Long id, Instant moment, User client) {
+	public Order(Long id, Instant moment, OrderStatus ordeStatus, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
 		this.client = client;
+		//this.ordeStatus = ordeStatus;
+		setOrdeStatus(ordeStatus);
 	}
 	public Long getId() {
 		return id;
@@ -55,6 +61,14 @@ public class Order implements Serializable{
 	}
 	public void setClient(User client) {
 		this.client = client;
+	}
+	
+	public OrderStatus getOrdeStatus() {
+		return OrderStatus.valuesOf(ordeStatus);
+	}
+	public void setOrdeStatus(OrderStatus ordeStatus) {
+		if(ordeStatus != null)
+		this.ordeStatus = ordeStatus.getCode();
 	}
 	@Override
 	public int hashCode() {

@@ -15,15 +15,6 @@ import com.erpro.orderby.service.ProductService;
 @RestController
 @RequestMapping(value = "/product")
 public class ProductResource {
-
-	/*
-	 * 
-	@GetMapping
-	public ResponseEntity<Product> findAll(){
-		//Teste
-		Product u = new Product(1L, "Flavio", "Solebac@hotmail.com", "111111", "abc");
-		return ResponseEntity.ok().body(u);
-	}*/
 	
 	@Autowired
 	private ProductService service;

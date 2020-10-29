@@ -41,6 +41,7 @@ public class OrderItem implements Serializable{
 		id.setOrder(order);
 	}
 
+	//@JsonIgnore Coloque-o no metodo getOrders() na classe Products
 	public Product getProduct() {
 		return id.getProduct();
 	}
@@ -61,6 +62,10 @@ public class OrderItem implements Serializable{
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	
+	public double getSubTotal() {
+		return quantidade * price;
 	}
 
 	@Override

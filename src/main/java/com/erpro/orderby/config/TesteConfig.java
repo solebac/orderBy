@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.erpro.orderby.entities.Category;
 import com.erpro.orderby.entities.Order;
+import com.erpro.orderby.entities.OrderItem;
 import com.erpro.orderby.entities.Product;
 import com.erpro.orderby.entities.User;
 import com.erpro.orderby.entities.enums.OrderStatus;
 import com.erpro.orderby.repositories.CategoryRepository;
+import com.erpro.orderby.repositories.OrderItemRepository;
 import com.erpro.orderby.repositories.OrderRepository;
 import com.erpro.orderby.repositories.ProductRepository;
 import com.erpro.orderby.repositories.UserRepository;
@@ -30,6 +32,8 @@ public class TesteConfig implements CommandLineRunner{
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private ProductRepository productRepository;
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -51,8 +55,6 @@ public class TesteConfig implements CommandLineRunner{
 		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, ""); 
 		
-		userRepository.saveAll(Arrays.asList(u1, u2));
-		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 		
@@ -63,6 +65,16 @@ public class TesteConfig implements CommandLineRunner{
 		p4.getCategories().add(cat3);
 		p5.getCategories().add(cat2);
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		
+		userRepository.saveAll(Arrays.asList(u1, u2));
+		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
 	}
 
